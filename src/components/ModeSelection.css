@@ -1,0 +1,113 @@
+/* ===== Страница ===== */
+.mode-page {
+  text-align: center;
+  margin-top: 40px;
+  animation: fadeIn 0.5s ease;
+}
+
+/* Заголовок */
+.mode-title {
+  color: #5b3bea;
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 35px;
+}
+
+/* ===== Сетка ===== */
+.mode-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+  padding: 10px;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+/* ===== Карточка режима ===== */
+.mode-card {
+  background: #ffffff;
+  padding: 28px 22px;
+  border-radius: 22px;
+
+  /* НОВОЕ: Градиентная рамка */
+  border: 2px solid transparent;
+  background-image: linear-gradient(#fff, #fff),
+    linear-gradient(to bottom right, #c5b3ff, #8056ff);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+
+  /* тень */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(.15, .75, .4, 1),
+              box-shadow 0.25s ease,
+              border-color 0.3s ease;
+}
+
+/* Эмодзи */
+.mode-emoji {
+  font-size: 50px;
+  display: block;
+  margin-bottom: 16px;
+  transition: transform 0.4s cubic-bezier(.15, .75, .4, 1);
+}
+
+/* Заголовки */
+.mode-card h2 {
+  margin: 6px 0;
+  color: #4d34c5;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.mode-card p {
+  font-size: 15px;
+  color: #6a5fa5;
+}
+
+/* ===== Ховер-эффекты ===== */
+.mode-card:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+}
+
+/* Увеличиваем эмодзи при наведении */
+.mode-card:hover .mode-emoji {
+  transform: scale(1.18) rotate(4deg);
+}
+
+/* ===== Анимация появления ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Эффект клика (active) ===== */
+.mode-card:active {
+  transform: scale(0.96);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+/* Когда карточка выбрана — делаем анимацию */
+.mode-card.chosen {
+  transform: scale(1.15) translateY(-20px);
+  z-index: 10;
+  transition: transform 0.45s cubic-bezier(.2, .7, .3, 1);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Остальные карточки исчезают */
+.fade-out-others .mode-card:not(.chosen) {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+  filter: blur(2px);
+  transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease;
+}

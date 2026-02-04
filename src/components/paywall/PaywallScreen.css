@@ -1,0 +1,45 @@
+.paywall-screen {
+  max-width: 520px;
+  margin: 40px auto;
+  padding: 24px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.paywall-screen h2 {
+  margin-bottom: 12px;
+  font-size: 1.6rem;
+}
+
+.paywall-screen p {
+  margin-bottom: 20px;
+  color: #444;
+  line-height: 1.5;
+}
+
+.paywall-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.paywall-actions button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.paywall-actions button.primary {
+  background-color: #2563eb;
+  color: white;
+}
+
+.paywall-actions button.secondary {
+  background-color: #e5e7eb;
+  color: #111827;
+}

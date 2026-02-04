@@ -1,0 +1,12 @@
+{
+  "ADVANCE_OK": "You can move on 👍",
+  "REPEAT_WEAK_AREA": "Let’s repeat a difficult part",
+  "TAKE_BREAK_FATIGUE": "You seem tired — let’s take a break",
+
+  "BTN_CONTINUE": "Continue",
+  "BTN_REPEAT": "Repeat",
+  "BTN_TAKE_BREAK": "Take a break",
+
+  "LEVEL_LABEL": "Level",
+  "TASK_LABEL": "Next task"
+}
