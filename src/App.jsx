@@ -1,6 +1,9 @@
 import { useState } from "react";
 import "./App.css";
 
+// ✅ Backend base URL
+import { API_BASE_URL } from "./config";
+
 // API
 import {
   nextStep,
@@ -23,12 +26,12 @@ import DiagnosticCompleteScreen from "./components/diagnostic/DiagnosticComplete
 import PaywallScreen from "./components/paywall/PaywallScreen";
 import VoiceUsageBar from "./components/usage/VoiceUsageBar";
 
-// 🔑 Новый чистый пользователь
+// 🔑 User
 const USER_ID = "test-user-hybrid-v1-clean";
 
 function App() {
   const [uiState, setUiState] = useState({ state: UI_STATES.IDLE });
-  const [flowMode, setFlowMode] = useState("NONE"); // NONE | DIAGNOSTIC | ADAPTIVE
+  const [flowMode, setFlowMode] = useState("NONE");
   const [languageMode, setLanguageMode] = useState("EN");
   const [usage, setUsage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -72,7 +75,7 @@ function App() {
       setError(null);
 
       const response = await fetch(
-        "http://localhost:3001/diagnostic/step",
+        `${API_BASE_URL}/diagnostic/step`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -99,7 +102,7 @@ function App() {
   async function startDiagnostic() {
     setFlowMode("DIAGNOSTIC");
 
-    await fetch("http://localhost:3001/diagnostic/start", {
+    await fetch(`${API_BASE_URL}/diagnostic/start`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId: USER_ID })
