@@ -1,23 +1,19 @@
 import { useState } from "react";
 import "./App.css";
 
-// ✅ Backend base URL
 import { API_BASE_URL } from "./config";
 
-// API
 import {
   nextStep,
   startExam,
   stopExam
 } from "./api/adaptiveClient";
 
-// UI State Machine
 import {
   resolveUIState,
   UI_STATES
 } from "./state/uiStateMachine";
 
-// Components
 import LessonPage from "./components/LessonPage";
 import FeedbackPage from "./components/FeedbackPage";
 import PassPD3Screen from "./components/exam/PassPD3Screen";
@@ -26,7 +22,6 @@ import DiagnosticCompleteScreen from "./components/diagnostic/DiagnosticComplete
 import PaywallScreen from "./components/paywall/PaywallScreen";
 import VoiceUsageBar from "./components/usage/VoiceUsageBar";
 
-// 🔑 User
 const USER_ID = "test-user-hybrid-v1-clean";
 
 function App() {
@@ -37,9 +32,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // ---------------------------
-  // Adaptive flow
-  // ---------------------------
   async function loadAdaptiveStep(answerMeta = {}) {
     try {
       setLoading(true);
@@ -66,9 +58,6 @@ function App() {
     }
   }
 
-  // ---------------------------
-  // Diagnostic flow
-  // ---------------------------
   async function loadDiagnosticStep(answerMeta = {}) {
     try {
       setLoading(true);
@@ -96,9 +85,6 @@ function App() {
     }
   }
 
-  // ---------------------------
-  // Start diagnostic
-  // ---------------------------
   async function startDiagnostic() {
     setFlowMode("DIAGNOSTIC");
 
@@ -111,19 +97,16 @@ function App() {
     await loadDiagnosticStep();
   }
 
-  // ---------------------------
-  // Render helpers
-  // ---------------------------
   function renderContent() {
     if (loading) return <p>Loading…</p>;
     if (error) return <p style={{ color: "red" }}>{error}</p>;
 
     switch (uiState.state) {
+
       case UI_STATES.TASK:
         return (
           <>
             <VoiceUsageBar usage={usage} />
-
             <LessonPage
               task={uiState.task}
               languageMode={languageMode}
@@ -167,12 +150,8 @@ function App() {
       case UI_STATES.PAYWALL:
         return (
           <PaywallScreen
-            onSubscribe={() => {
-              alert("Subscription will connect to Shopify here");
-            }}
-            onViewProgress={() => {
-              setUiState({ state: UI_STATES.IDLE });
-            }}
+            onSubscribe={() => alert("Subscription will connect to Shopify here")}
+            onViewProgress={() => setUiState({ state: UI_STATES.IDLE })}
           />
         );
 
@@ -206,13 +185,34 @@ function App() {
       case UI_STATES.IDLE:
       default:
         return (
-          <div>
-            <p>Welcome to Dansk TeacherAI 👋</p>
-            <p>
-              We’ll help you understand your current Danish level
-              and suggest the best learning path for you.
+          <div style={{
+            maxWidth: "720px",
+            margin: "40px auto",
+            textAlign: "center",
+            padding: "20px"
+          }}>
+            <h2 style={{ marginBottom: "12px" }}>
+              Welcome to Dansk TeacherAI 👋
+            </h2>
+
+            <p style={{ fontSize: "18px", color: "#555", marginBottom: "28px" }}>
+              Discover your Danish level and get a personalized learning path
+              to pass PD2 & PD3 faster and with confidence.
             </p>
-            <button onClick={startDiagnostic}>
+
+            <button
+              onClick={startDiagnostic}
+              style={{
+                padding: "14px 28px",
+                fontSize: "18px",
+                borderRadius: "10px",
+                border: "none",
+                cursor: "pointer",
+                background: "#4f46e5",
+                color: "white",
+                boxShadow: "0 6px 16px rgba(79,70,229,0.3)"
+              }}
+            >
               Start free level check
             </button>
           </div>
@@ -222,7 +222,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Dansk TeacherAI</h1>
       {renderContent()}
     </div>
   );
