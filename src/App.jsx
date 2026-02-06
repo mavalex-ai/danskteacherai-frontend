@@ -187,7 +187,7 @@ function App() {
         return (
           <div style={{
             maxWidth: "720px",
-            margin: "40px auto",
+            margin: "12px auto",
             textAlign: "center",
             padding: "20px"
           }}>

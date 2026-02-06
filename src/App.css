@@ -1,97 +1,101 @@
-/* ---------- ОБЩИЙ СТИЛЬ ПРИЛОЖЕНИЯ ---------- */
+/* ---------- БАЗОВЫЙ RESET ДЛЯ ВСТРАИВАНИЯ В САЙТ ---------- */
 
-body {
+html, body, #root {
   margin: 0;
+  padding: 0;
+  background: transparent;
   font-family: "Segoe UI", Arial, sans-serif;
-  background: #f2f0ff; /* нежно-фиолетовый фон */
 }
+
+.App {
+  background: transparent;
+  max-width: 100%;
+  padding: 0;
+}
+
+/* ---------- УБИРАЕМ СТАРЫЕ КАРТОЧКИ И ФОНЫ ---------- */
 
 .app {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
 }
 
-/* ---------- ЗАГОЛОВОК ---------- */
+/* ---------- ЗАГОЛОВКИ ---------- */
 
-h1 {
+h1, h2 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #5b3bea;
-  font-size: 32px;
+  margin: 10px 0 12px 0;
+  color: #4f46e5;
+  font-weight: 600;
 }
 
-/* ---------- ОБЛАСТЬ СООБЩЕНИЙ ---------- */
+/* ---------- ОБЛАСТЬ ДИАЛОГА ---------- */
 
 .messages {
-  background: #ffffff;
-  padding: 20px;
-  height: 70vh;
-  border-radius: 20px;
+  background: transparent;
+  padding: 12px 6px;
+  height: auto;
   overflow-y: auto;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
 }
 
-/* ---------- ПУЗЫРЬКИ СООБЩЕНИЙ ---------- */
+/* ---------- ПУЗЫРЬКИ ---------- */
 
 .message {
   max-width: 75%;
-  padding: 14px 18px;
-  margin-bottom: 12px;
-  border-radius: 18px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-radius: 16px;
   line-height: 1.4;
-  font-size: 17px;
+  font-size: 16px;
 }
 
-/* Сообщение пользователя — справа */
+/* Пользователь */
+
 .message.user {
-  background: #8056ff;
+  background: #4f46e5;
   color: white;
   margin-left: auto;
   border-bottom-right-radius: 4px;
 }
 
-/* Сообщение AI — слева */
+/* AI */
+
 .message.assistant {
-  background: #ece8ff;
-  color: #2b1f57;
+  background: #eef2ff;
+  color: #1e1b4b;
   margin-right: auto;
   border-bottom-left-radius: 4px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* ---------- АВАТАР AI ---------- */
-
-.message.assistant::before {
-  content: "🇩🇰";
-  font-size: 24px;
-}
-
-/* ---------- ИНДИКАТОР "AI skriver..." ---------- */
-
-.typing-indicator {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
+.message.assistant::before {
+  content: "🇩🇰";
+  font-size: 20px;
+}
+
+/* ---------- ИНДИКАТОР НАБОРА ---------- */
+
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .dot {
-  width: 8px;
-  height: 8px;
-  background: #8056ff;
+  width: 7px;
+  height: 7px;
+  background: #4f46e5;
   border-radius: 50%;
   animation: blink 1.4s infinite ease-in-out;
 }
 
-.dot:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.dot:nth-child(3) {
-  animation-delay: 0.4s;
-}
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
 
 @keyframes blink {
   0% { opacity: 0.2; }
@@ -99,41 +103,42 @@ h1 {
   100% { opacity: 0.2; }
 }
 
-/* ---------- ПОЛЕ ВВОДА И КНОПКА ОТПРАВКИ ---------- */
+/* ---------- ВВОД ---------- */
 
 .input-row {
   display: flex;
-  margin-top: 15px;
+  margin-top: 12px;
   gap: 10px;
 }
 
 input {
   flex-grow: 1;
-  padding: 14px 18px;
-  font-size: 17px;
-  border-radius: 14px;
-  border: 2px solid #cfc3ff;
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 1.5px solid #c7d2fe;
   background: white;
   outline: none;
-  transition: 0.2s;
 }
 
 input:focus {
-  border-color: #7a52ff;
-  box-shadow: 0 0 6px rgba(122, 82, 255, 0.4);
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79,70,229,0.15);
 }
 
+/* ---------- КНОПКА ---------- */
+
 button {
-  padding: 14px 24px;
-  background: #7a52ff;
+  padding: 12px 22px;
+  background: #4f46e5;
   border: none;
-  border-radius: 14px;
+  border-radius: 12px;
   color: white;
-  font-size: 17px;
+  font-size: 16px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.2s ease;
 }
 
 button:hover {
-  background: #5b3bea;
+  background: #4338ca;
 }
