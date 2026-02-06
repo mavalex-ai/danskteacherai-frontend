@@ -78,7 +78,7 @@ function App() {
       const nextUI = resolveUIState(response);
       setUiState(nextUI);
       setLanguageMode(response.languageMode || "EN");
-    } catch (err) {
+    } catch {
       setError("Diagnostic error");
     } finally {
       setLoading(false);
@@ -98,8 +98,8 @@ function App() {
   }
 
   function renderContent() {
-    if (loading) return <p>Loading…</p>;
-    if (error) return <p style={{ color: "red" }}>{error}</p>;
+    if (loading) return <p className="loading">Loading…</p>;
+    if (error) return <p className="error">{error}</p>;
 
     switch (uiState.state) {
 
@@ -110,13 +110,11 @@ function App() {
             <LessonPage
               task={uiState.task}
               languageMode={languageMode}
-              onSubmit={(answerMeta) => {
-                if (flowMode === "DIAGNOSTIC") {
-                  loadDiagnosticStep(answerMeta);
-                } else {
-                  loadAdaptiveStep(answerMeta);
-                }
-              }}
+              onSubmit={(answerMeta) =>
+                flowMode === "DIAGNOSTIC"
+                  ? loadDiagnosticStep(answerMeta)
+                  : loadAdaptiveStep(answerMeta)
+              }
             />
           </>
         );
@@ -126,13 +124,11 @@ function App() {
           <FeedbackPage
             feedback={uiState.feedback}
             languageMode={languageMode}
-            onContinue={() => {
-              if (flowMode === "DIAGNOSTIC") {
-                loadDiagnosticStep();
-              } else {
-                loadAdaptiveStep();
-              }
-            }}
+            onContinue={() =>
+              flowMode === "DIAGNOSTIC"
+                ? loadDiagnosticStep()
+                : loadAdaptiveStep()
+            }
           />
         );
 
@@ -182,17 +178,14 @@ function App() {
 
         return null;
 
-      case UI_STATES.IDLE:
       default:
         return (
           <div className="landing">
             <h2>Welcome to Dansk TeacherAI 👋</h2>
-
             <p>
               Discover your Danish level and get a personalized learning path
               to pass PD2 & PD3 faster and with confidence.
             </p>
-
             <button onClick={startDiagnostic}>
               Start free level check
             </button>
