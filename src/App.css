@@ -1,47 +1,63 @@
-/* ---------- БАЗОВЫЙ RESET ДЛЯ ВСТРАИВАНИЯ В САЙТ ---------- */
+/* ===== БАЗА ДЛЯ ВСТРОЕННОГО ПРИЛОЖЕНИЯ ===== */
 
 html, body, #root {
   margin: 0;
   padding: 0;
-  background: transparent;
+  background: #f5f7ff;
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
-.App {
-  background: transparent;
-  max-width: 100%;
-  padding: 0;
-}
-
-/* ---------- УБИРАЕМ СТАРЫЕ КАРТОЧКИ И ФОНЫ ---------- */
+/* ===== ОБЩИЙ КОНТЕЙНЕР ===== */
 
 .app {
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  background: transparent;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 16px;
 }
 
-/* ---------- ЗАГОЛОВКИ ---------- */
+/* ===== LANDING ===== */
 
-h1, h2 {
+.landing {
   text-align: center;
-  margin: 10px 0 12px 0;
+  margin-bottom: 24px;
+}
+
+.landing h2 {
   color: #4f46e5;
+  margin-bottom: 10px;
   font-weight: 600;
 }
 
-/* ---------- ОБЛАСТЬ ДИАЛОГА ---------- */
+.landing p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 22px;
+}
+
+/* ===== КНОПКА ===== */
+
+button {
+  padding: 14px 28px;
+  background: #4f46e5;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  box-shadow: 0 6px 16px rgba(79,70,229,0.25);
+}
+
+button:hover {
+  background: #4338ca;
+}
+
+/* ===== ЧАТ ===== */
 
 .messages {
   background: transparent;
-  padding: 12px 6px;
-  height: auto;
-  overflow-y: auto;
-  box-shadow: none;
+  padding: 12px 4px;
 }
-
-/* ---------- ПУЗЫРЬКИ ---------- */
 
 .message {
   max-width: 75%;
@@ -52,7 +68,7 @@ h1, h2 {
   font-size: 16px;
 }
 
-/* Пользователь */
+/* User */
 
 .message.user {
   background: #4f46e5;
@@ -78,32 +94,7 @@ h1, h2 {
   font-size: 20px;
 }
 
-/* ---------- ИНДИКАТОР НАБОРА ---------- */
-
-.typing-indicator {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.dot {
-  width: 7px;
-  height: 7px;
-  background: #4f46e5;
-  border-radius: 50%;
-  animation: blink 1.4s infinite ease-in-out;
-}
-
-.dot:nth-child(2) { animation-delay: 0.2s; }
-.dot:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes blink {
-  0% { opacity: 0.2; }
-  20% { opacity: 1; }
-  100% { opacity: 0.2; }
-}
-
-/* ---------- ВВОД ---------- */
+/* ===== INPUT ===== */
 
 .input-row {
   display: flex;
@@ -126,19 +117,26 @@ input:focus {
   box-shadow: 0 0 0 2px rgba(79,70,229,0.15);
 }
 
-/* ---------- КНОПКА ---------- */
+/* ===== TYPING ===== */
 
-button {
-  padding: 12px 22px;
-  background: #4f46e5;
-  border: none;
-  border-radius: 12px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.2s ease;
+.typing-indicator {
+  display: flex;
+  gap: 6px;
 }
 
-button:hover {
-  background: #4338ca;
+.dot {
+  width: 7px;
+  height: 7px;
+  background: #4f46e5;
+  border-radius: 50%;
+  animation: blink 1.4s infinite ease-in-out;
+}
+
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink {
+  0% { opacity: 0.2; }
+  20% { opacity: 1; }
+  100% { opacity: 0.2; }
 }

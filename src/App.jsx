@@ -185,34 +185,15 @@ function App() {
       case UI_STATES.IDLE:
       default:
         return (
-          <div style={{
-            maxWidth: "720px",
-            margin: "12px auto",
-            textAlign: "center",
-            padding: "20px"
-          }}>
-            <h2 style={{ marginBottom: "12px" }}>
-              Welcome to Dansk TeacherAI 👋
-            </h2>
+          <div className="landing">
+            <h2>Welcome to Dansk TeacherAI 👋</h2>
 
-            <p style={{ fontSize: "18px", color: "#555", marginBottom: "28px" }}>
+            <p>
               Discover your Danish level and get a personalized learning path
               to pass PD2 & PD3 faster and with confidence.
             </p>
 
-            <button
-              onClick={startDiagnostic}
-              style={{
-                padding: "14px 28px",
-                fontSize: "18px",
-                borderRadius: "10px",
-                border: "none",
-                cursor: "pointer",
-                background: "#4f46e5",
-                color: "white",
-                boxShadow: "0 6px 16px rgba(79,70,229,0.3)"
-              }}
-            >
+            <button onClick={startDiagnostic}>
               Start free level check
             </button>
           </div>
@@ -221,7 +202,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="app">
       {renderContent()}
     </div>
   );
