@@ -78,14 +78,17 @@ html, body, #root {
 /* ===== FORCE ALIGNMENT WITH DAWN CONTAINER ===== */
 /* Это ключевой блок для центрирования */
 
+/* ===== FULL ALIGNMENT FIX FOR DAWN ===== */
+
 .page-width .app {
-  width: 100%;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
 }
 
 .page-width .landing {
-  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 48px auto;
 }
-
 /* ===== CHAT AREA ===== */
 
 .messages {
