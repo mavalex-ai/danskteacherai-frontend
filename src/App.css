@@ -8,6 +8,7 @@ html, body, #root {
 }
 
 /* ===== MAIN WRAPPER ===== */
+/* Dawn управляет контейнером page-width */
 
 .app {
   width: 100%;
@@ -19,7 +20,7 @@ html, body, #root {
 .landing {
   text-align: center;
   margin: 0 auto 48px auto;
-  max-width: 720px;   /* ← именно narrow-контейнер Dawn */
+  width: 100%;            /* Используем ширину контейнера Dawn */
 }
 
 /* Бренд-заголовок */
@@ -38,8 +39,9 @@ html, body, #root {
   color: #333;
 }
 
-/* Основной текст */
+/* Основной текст — ограничиваем ТОЛЬКО текст, а не блок */
 .landing p {
+  max-width: 720px;       /* текст аккуратно ограничен */
   margin: 0 auto 16px auto;
   font-size: 16px;
   line-height: 1.55;
@@ -48,13 +50,14 @@ html, body, #root {
 
 /* Буллеты */
 .features {
-  margin: 20px 0 28px 0;
+  max-width: 720px;
+  margin: 20px auto 28px auto;
   font-size: 15px;
   color: #444;
   line-height: 1.6;
 }
 
-/* ===== CTA BUTTON ===== */
+/* ===== CTA BUTTON (увеличенная) ===== */
 
 .landing button {
   padding: 18px 36px;
@@ -71,18 +74,6 @@ html, body, #root {
 .landing button:hover {
   background: #4338ca;
   transform: translateY(-1px);
-}
-
-/* ===== REMOVE DAWN NARROW CONSTRAINT ===== */
-
-.page-width--narrow .app {
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.page-width--narrow .landing {
-  max-width: 720px;
-  margin: 0 auto 48px auto;
 }
 
 /* ===== CHAT AREA ===== */
