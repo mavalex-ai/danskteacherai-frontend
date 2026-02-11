@@ -1,63 +1,44 @@
-/* ===== GLOBAL RESET ===== */
-
 html, body, #root {
   margin: 0;
   padding: 0;
-  background: transparent;
+  width: 100%;
+  background: white;
   font-family: "Helvetica", "Segoe UI", Arial, sans-serif;
 }
 
-/* ===== MAIN WRAPPER ===== */
-/* Dawn управляет контейнером page-width */
-
 .app {
   width: 100%;
-  background: transparent;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
-
-/* ===== HERO ===== */
 
 .landing {
   text-align: center;
-  margin: 0 auto 48px auto;
-  width: 100%;            /* Используем ширину контейнера Dawn */
 }
 
-/* Бренд-заголовок */
 .brand-title {
   font-size: 34px;
   font-weight: 700;
   margin-bottom: 18px;
-  color: #111;
 }
 
-/* Подзаголовок */
 .hero-subtitle {
-  font-size: 17px;
-  font-weight: 500;
+  font-size: 18px;
   margin-bottom: 16px;
-  color: #333;
 }
 
-/* Основной текст — ограничиваем ТОЛЬКО текст, а не блок */
 .landing p {
-  max-width: 720px;       /* текст аккуратно ограничен */
+  max-width: 700px;
   margin: 0 auto 16px auto;
-  font-size: 16px;
-  line-height: 1.55;
-  color: #444;
-}
-
-/* Буллеты */
-.features {
-  max-width: 720px;
-  margin: 20px auto 28px auto;
-  font-size: 15px;
-  color: #444;
   line-height: 1.6;
 }
 
-/* ===== CTA BUTTON (увеличенная) ===== */
+.features {
+  max-width: 700px;
+  margin: 20px auto;
+}
 
 .landing button {
   padding: 18px 36px;
@@ -67,92 +48,4 @@ html, body, #root {
   background: #4f46e5;
   color: white;
   cursor: pointer;
-  transition: 0.2s ease;
-  box-shadow: 0 8px 20px rgba(79,70,229,.25);
-}
-
-.landing button:hover {
-  background: #4338ca;
-  transform: translateY(-1px);
-}
-
-/* ===== CHAT AREA ===== */
-
-.messages {
-  background: transparent;
-  padding: 4px 0;
-}
-
-/* ===== BUBBLES ===== */
-
-.message {
-  max-width: 75%;
-  padding: 10px 14px;
-  margin-bottom: 8px;
-  border-radius: 14px;
-  line-height: 1.4;
-  font-size: 15px;
-}
-
-.message.user {
-  background: #4f46e5;
-  color: white;
-  margin-left: auto;
-  border-bottom-right-radius: 6px;
-}
-
-.message.assistant {
-  background: #eef2ff;
-  color: #1e1b4b;
-  margin-right: auto;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  border-bottom-left-radius: 6px;
-}
-
-.message.assistant::before {
-  content: "🇩🇰";
-  font-size: 16px;
-}
-
-/* ===== INPUT ===== */
-
-.input-row {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-input {
-  flex: 1;
-  padding: 10px 14px;
-  font-size: 15px;
-  border-radius: 10px;
-  border: 1.5px solid #c7d2fe;
-  outline: none;
-}
-
-input:focus {
-  border-color: #4f46e5;
-  box-shadow: 0 0 0 2px rgba(79,70,229,.12);
-}
-
-button {
-  padding: 10px 18px;
-  border-radius: 10px;
-  border: none;
-  background: #4f46e5;
-  color: white;
-  cursor: pointer;
-}
-
-.loading {
-  text-align: center;
-  color: #666;
-}
-
-.error {
-  color: red;
-  text-align: center;
 }
