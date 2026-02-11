@@ -8,11 +8,10 @@ html, body, #root {
 }
 
 /* ===== MAIN WRAPPER ===== */
-/* Убираем собственную геометрию — Shopify контейнер управляет центром */
+/* НЕ задаём собственную ширину — Dawn управляет контейнером */
 
 .app {
   width: 100%;
-  padding: 0;
   background: transparent;
 }
 
@@ -20,11 +19,11 @@ html, body, #root {
 
 .landing {
   text-align: center;
-  margin: 0 auto 40px auto;
-  max-width: 760px;   /* Чуть уже, чтобы совпадать с другими страницами */
+  margin: 0 auto 48px auto;
+  width: 100%;
 }
 
-/* Большой бренд */
+/* Бренд-заголовок */
 .brand-title {
   font-size: 34px;
   font-weight: 700;
@@ -34,7 +33,7 @@ html, body, #root {
 
 /* Подзаголовок */
 .hero-subtitle {
-  font-size: 17px;     /* Чуть меньше, спокойнее */
+  font-size: 17px;
   font-weight: 500;
   margin-bottom: 16px;
   color: #333;
@@ -42,7 +41,7 @@ html, body, #root {
 
 /* Основной текст */
 .landing p {
-  max-width: 620px;
+  max-width: 720px;
   margin: 0 auto 16px auto;
   font-size: 16px;
   line-height: 1.55;
@@ -60,8 +59,8 @@ html, body, #root {
 /* ===== CTA BUTTON (увеличенная) ===== */
 
 .landing button {
-  padding: 18px 36px;        /* увеличили */
-  font-size: 17px;           /* немного крупнее */
+  padding: 18px 36px;
+  font-size: 17px;
   border-radius: 12px;
   border: none;
   background: #4f46e5;
@@ -74,6 +73,17 @@ html, body, #root {
 .landing button:hover {
   background: #4338ca;
   transform: translateY(-1px);
+}
+
+/* ===== FORCE ALIGNMENT WITH DAWN CONTAINER ===== */
+/* Это ключевой блок для центрирования */
+
+.page-width .app {
+  width: 100%;
+}
+
+.page-width .landing {
+  width: 100%;
 }
 
 /* ===== CHAT AREA ===== */
