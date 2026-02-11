@@ -181,11 +181,21 @@ function App() {
       default:
         return (
           <div className="landing">
-            <h2>Welcome to Dansk TeacherAI 👋</h2>
+            <h1>Structured Danish learning — aligned with real language schools</h1>
+
             <p>
-              Discover your Danish level and get a personalized learning path
-              to pass PD2 & PD3 faster and with confidence.
+              Dansk TeacherAI follows the same progression, task types, and skill
+              development used in Danish language schools.
+              The program guides you step by step through all levels and prepares
+              you specifically for PD2 and PD3 exams.
             </p>
+
+            <div className="features">
+              <p>• Curriculum aligned with Danish language school standards</p>
+              <p>• Level-based progression from foundation to exam</p>
+              <p>• Practice built around real PD2 & PD3 formats</p>
+            </div>
+
             <button onClick={startDiagnostic}>
               Start free level check
             </button>
