@@ -5,7 +5,6 @@ import { API_BASE_URL } from "./config";
 
 import {
   nextStep,
-  startExam,
   stopExam
 } from "./api/adaptiveClient";
 
@@ -181,13 +180,20 @@ function App() {
       default:
         return (
           <div className="landing">
-            <h1>Structured Danish learning — aligned with real language schools</h1>
+
+            <div className="brand-title">
+              Dansk TeacherAI
+            </div>
+
+            <div className="hero-subtitle">
+              Structured Danish learning — aligned with real language schools
+            </div>
 
             <p>
               Dansk TeacherAI follows the same progression, task types, and skill
-              development used in Danish language schools.
-              The program guides you step by step through all levels and prepares
-              you specifically for PD2 and PD3 exams.
+              development used in Danish language schools. The program guides you
+              step by step through all levels and prepares you specifically for
+              PD2 and PD3 exams.
             </p>
 
             <div className="features">
@@ -199,6 +205,7 @@ function App() {
             <button onClick={startDiagnostic}>
               Start free level check
             </button>
+
           </div>
         );
     }
