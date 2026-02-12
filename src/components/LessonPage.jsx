@@ -21,8 +21,26 @@ export default function LessonPage({ task, onSubmit, onChangeMode }) {
 
   const charCount = answer.length;
 
+  // Временно задаём прогресс вручную (потом подключим к backend)
+  const currentStep = 1;
+  const totalSteps = 5;
+  const progressPercent = (currentStep / totalSteps) * 100;
+
   return (
     <div className="lesson-page fade-in">
+
+      {/* ===== PROGRESS ===== */}
+      <div className="progress-wrapper">
+        <div className="progress-label">
+          Step {currentStep} of {totalSteps}
+        </div>
+        <div className="progress-bar">
+          <div 
+            className="progress-fill"
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
+      </div>
 
       <div className="lesson-header">
         <button className="back-btn" onClick={onChangeMode}>
