@@ -1,7 +1,13 @@
 import { useState } from "react";
 import "./LessonPage.css";
 
-export default function LessonPage({ task, onSubmit, onChangeMode }) {
+export default function LessonPage({
+  task,
+  onSubmit,
+  onChangeMode,
+  currentStep = 1,
+  totalSteps = 4
+}) {
   const [answer, setAnswer] = useState("");
 
   if (!task) {
@@ -12,30 +18,25 @@ export default function LessonPage({ task, onSubmit, onChangeMode }) {
     if (!answer.trim()) return;
 
     onSubmit({
-      answer,
-      task
+      text: answer // ← КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ
     });
 
     setAnswer("");
   }
 
   const charCount = answer.length;
-
-  // Временно задаём прогресс вручную (потом подключим к backend)
-  const currentStep = 1;
-  const totalSteps = 5;
   const progressPercent = (currentStep / totalSteps) * 100;
 
   return (
     <div className="lesson-page fade-in">
 
-      {/* ===== PROGRESS ===== */}
+      {/* Progress */}
       <div className="progress-wrapper">
         <div className="progress-label">
           Step {currentStep} of {totalSteps}
         </div>
         <div className="progress-bar">
-          <div 
+          <div
             className="progress-fill"
             style={{ width: `${progressPercent}%` }}
           />
@@ -43,18 +44,12 @@ export default function LessonPage({ task, onSubmit, onChangeMode }) {
       </div>
 
       <div className="lesson-header">
-        <button className="back-btn" onClick={onChangeMode}>
-          ← Change mode
-        </button>
-        <h2>Lesson</h2>
+        <h2>Task</h2>
       </div>
 
       <div className="task-container">
-
-        <h3 className="task-title">Task</h3>
-
         <p className="task-main">
-          Write <strong>4–8 sentences about yourself in Danish.</strong>
+          {task.instruction}
         </p>
 
         <div className="task-hints">
@@ -69,7 +64,6 @@ export default function LessonPage({ task, onSubmit, onChangeMode }) {
         <p className="task-encouragement">
           Don’t worry about mistakes. Just write naturally.
         </p>
-
       </div>
 
       <textarea
@@ -84,7 +78,7 @@ export default function LessonPage({ task, onSubmit, onChangeMode }) {
         {charCount} characters
       </div>
 
-      <button 
+      <button
         className="submit-btn"
         onClick={handleSubmit}
         disabled={!answer.trim()}

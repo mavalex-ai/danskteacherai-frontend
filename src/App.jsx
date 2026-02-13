@@ -31,6 +31,12 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const [diagnosticStep, setDiagnosticStep] = useState(1);
+  const [diagnosticTotalSteps] = useState(4);
+
+  // =========================
+  // ADAPTIVE MODE
+  // =========================
   async function loadAdaptiveStep(answerMeta = {}) {
     try {
       setLoading(true);
@@ -43,13 +49,10 @@ function App() {
 
       const nextUI = resolveUIState(response);
 
-      if (response.subscription?.active) {
-        setFlowMode("ADAPTIVE");
-      }
-
       setUiState(nextUI);
       setLanguageMode(response.languageMode || "EN");
       setUsage(response.usage || null);
+
     } catch (err) {
       setError(err.message || "Adaptive error");
     } finally {
@@ -57,13 +60,16 @@ function App() {
     }
   }
 
+  // =========================
+  // DIAGNOSTIC MODE (DEBUG ENABLED)
+  // =========================
   async function loadDiagnosticStep(answerMeta = {}) {
     try {
       setLoading(true);
       setError(null);
 
       const response = await fetch(
-        `${API_BASE_URL}/diagnostic/step`,
+        `${API_BASE_URL}/diagnostic/step?t=${Date.now()}`, // защита от кеша
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -74,10 +80,33 @@ function App() {
         }
       ).then(r => r.json());
 
-      const nextUI = resolveUIState(response);
-      setUiState(nextUI);
+      console.log("=== BACKEND RESPONSE ===");
+      console.log(response);
+
+      if (response.diagnosticResult) {
+        console.log("Diagnostic complete:", response.diagnosticResult);
+
+        setUiState({
+          state: UI_STATES.DIAGNOSTIC_COMPLETE,
+          result: response.diagnosticResult
+        });
+        return;
+      }
+
+      console.log("Setting diagnostic step:", response.step);
+      console.log("Task from backend:", response.task);
+
+      setDiagnosticStep(response.step);
+
+      setUiState({
+        state: UI_STATES.TASK,
+        task: { ...response.task } // принудительно новый объект
+      });
+
       setLanguageMode(response.languageMode || "EN");
-    } catch {
+
+    } catch (err) {
+      console.error("Diagnostic error:", err);
       setError("Diagnostic error");
     } finally {
       setLoading(false);
@@ -86,6 +115,7 @@ function App() {
 
   async function startDiagnostic() {
     setFlowMode("DIAGNOSTIC");
+    setDiagnosticStep(1);
 
     await fetch(`${API_BASE_URL}/diagnostic/start`, {
       method: "POST",
@@ -93,21 +123,39 @@ function App() {
       body: JSON.stringify({ userId: USER_ID })
     });
 
-    await loadDiagnosticStep();
+    loadDiagnosticStep();
   }
 
+  // =========================
+  // RENDER
+  // =========================
   function renderContent() {
+
     if (loading) return <p className="loading">Loading…</p>;
     if (error) return <p className="error">{error}</p>;
 
     switch (uiState.state) {
 
       case UI_STATES.TASK:
+
+        console.log("=== RENDERING TASK ===");
+        console.log("Current task in state:", uiState.task);
+
         return (
           <>
             <VoiceUsageBar usage={usage} />
             <LessonPage
               task={uiState.task}
+              currentStep={
+                flowMode === "DIAGNOSTIC"
+                  ? diagnosticStep
+                  : 1
+              }
+              totalSteps={
+                flowMode === "DIAGNOSTIC"
+                  ? diagnosticTotalSteps
+                  : 5
+              }
               languageMode={languageMode}
               onSubmit={(answerMeta) =>
                 flowMode === "DIAGNOSTIC"
@@ -145,8 +193,10 @@ function App() {
       case UI_STATES.PAYWALL:
         return (
           <PaywallScreen
-            onSubscribe={() => alert("Subscription will connect to Shopify here")}
-            onViewProgress={() => setUiState({ state: UI_STATES.IDLE })}
+            onSubscribe={() => alert("Subscription logic here")}
+            onViewProgress={() =>
+              setUiState({ state: UI_STATES.IDLE })
+            }
           />
         );
 
@@ -180,32 +230,10 @@ function App() {
       default:
         return (
           <div className="landing">
-
-            <div className="brand-title">
-              Dansk TeacherAI
-            </div>
-
-            <div className="hero-subtitle">
-              Structured Danish learning — aligned with real language schools
-            </div>
-
-            <p>
-              Dansk TeacherAI follows the same progression, task types, and skill
-              development used in Danish language schools. The program guides you
-              step by step through all levels and prepares you specifically for
-              PD2 and PD3 exams.
-            </p>
-
-            <div className="features">
-              <p>• Curriculum aligned with Danish language school standards</p>
-              <p>• Level-based progression from foundation to exam</p>
-              <p>• Practice built around real PD2 & PD3 formats</p>
-            </div>
-
+            <h2>Welcome to Dansk TeacherAI</h2>
             <button onClick={startDiagnostic}>
               Start free level check
             </button>
-
           </div>
         );
     }
